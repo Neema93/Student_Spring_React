@@ -21,7 +21,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class contact {
+public class Contact {
     @Id
     @UuidGenerator
     @Column(name= "id", unique= true, updatable=false)
