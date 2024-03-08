@@ -12,16 +12,16 @@ spring:
     properties:
       hibernate:
          
-        # globally_quoted_identifiers: true
+        globally_quoted_identifiers: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        # format_sql: true
+        format_sql: true
   servlet:
     multipart:
       enabled: true
       max-file-size: 1000MB
       max-request-size: 1000MB
   mvc:
-    # throw-exception-if-no-handler-found: true
+    throw-exception-if-no-handler-found: true
     async:
       request-timeout: 3600000
 server:

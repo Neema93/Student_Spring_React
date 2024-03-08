@@ -30,7 +30,8 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 @RequiredArgsConstructor
 public class ContactService {
     private final ContactRepo contactRepo;
-    public Page<Contact> getAllContect(int page,int size){
+ 
+    public Page<Contact> getAllContacts(int page, int size) {
         return contactRepo.findAll(PageRequest.of(page, size, Sort.by("name")));
     }
     public Contact getContact(String id){
