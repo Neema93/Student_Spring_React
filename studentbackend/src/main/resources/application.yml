@@ -35,7 +35,7 @@ spring:
     async:
       request-timeout: 3600000
 server:
-  port: 8090
+  port: 8080
   error:
     path: /user/error
     whitelabel:
