@@ -11,6 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @RestController
@@ -32,6 +35,10 @@ public List<Student> getAllStudent() {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No students found");
     }
     return students;
+}
+@PostMapping("/students")
+public Student createStudent(@RequestBody Student student) {
+    return studentRepo.save(student);
 }
 
 }
