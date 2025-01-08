@@ -6,7 +6,6 @@ const StudentForm = () => {
     const [grade, setGrade] = useState('');
     const [error, setError] = useState('');
 
-  // Handle form input changes
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);
   };
