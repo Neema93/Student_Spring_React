@@ -21,7 +21,9 @@ const StudentDetails = () => {
   }, []);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
-
+  const handleDelete = () => {
+    
+  }
   return (
     <>
       <h1>Student Details</h1>
@@ -31,6 +33,7 @@ const StudentDetails = () => {
           <td>LastName</td>
           <td>Age</td>
           <td>Grade</td>
+          <td>Delete</td>
         </tr>
         {student.map((student) => (
           <tr key={student.id}>
@@ -38,7 +41,8 @@ const StudentDetails = () => {
             <td>{student.lastName}</td>
             <td>{student.age}</td>
             <td>{student.grade}</td>
-          </tr>
+            <td><button onClick={handleDelete}>Delete</button></td>
+          </tr> 
         ))}
       </table>
     </>
