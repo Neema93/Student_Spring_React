@@ -1,33 +1,18 @@
-import React, { useState, useEffect } from "react";
-const StudentDetails = () => {
-  const [student, setStudent] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+import { connect } from "react-redux";
 
-  useEffect(() => {
-    fetch("http://localhost:8080/students")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setStudent(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err);
-        setLoading(false);
-      });
-  }, []);
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+const StudentDetails = (props) => {
+  const students = props.student;
+  console.log ("Props", props)
   const handleDelete = () => {
-    
+
   }
   return (
     <>
       <h1>Student Details</h1>
-      <table>
+      { students.length === 0 ? ( 
+            <p>No student available</p>
+        ) : (
+      <table> 
         <tr>
           <td>FirstName</td>
           <td>LastName</td>
@@ -35,7 +20,8 @@ const StudentDetails = () => {
           <td>Grade</td>
           <td>Delete</td>
         </tr>
-        {student.map((student) => (
+       
+        {students.map((student) => (
           <tr key={student.id}>
             <td>{student.firstName}</td>
             <td>{student.lastName}</td>
@@ -45,7 +31,14 @@ const StudentDetails = () => {
           </tr> 
         ))}
       </table>
+  )}
     </>
   );
 };
-export default StudentDetails;
+const mapStateToProps = (state) => {
+console.log(state)
+  return {
+    student:  state.student,
+  };
+};
+export default connect(mapStateToProps)(StudentDetails);
