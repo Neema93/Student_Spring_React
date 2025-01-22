@@ -6,7 +6,8 @@ import StudentDetails from './Componet/StudendDetails';
 import StudentForm from './Componet/StudentForm';
 import { configureStore } from "./Store/configureStore";
 const store = configureStore();
- 
+const state = store.getState();
+console.log("response",state)
 function App() {
   return (
     <div className="App">

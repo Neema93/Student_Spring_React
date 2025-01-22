@@ -1,8 +1,9 @@
 import axios from "axios";
-const API_URL = "http://localhost:8080/students/";
+const API_URL = "http://localhost:8080/students";
 export const getStudent = () => async(dispatch) => {
     try{
        const response = await axios.get(API_URL);
+    
        dispatch({ type: "GET_STUDENT", payload: response.data });
     }
     catch(error){

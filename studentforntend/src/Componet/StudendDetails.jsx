@@ -1,44 +1,59 @@
 import { connect } from "react-redux";
+import { useEffect } from "react";
+import { getStudent } from "../Action/student";
 
 const StudentDetails = (props) => {
-  const students = props.student;
-  console.log ("Props", props)
-  const handleDelete = () => {
+  
+  const { student, getStudent } = props; // Destructure props for better readability
+  console.log(student)
+  // Fetch students when the component is mounted
+  useEffect(() => {
+    getStudent();
+  }, [getStudent]);
 
+  // Render based on whether data is available or not
+  if (!student || student.length === 0) {
+    return <p>No students available</p>;
   }
+
   return (
     <>
       <h1>Student Details</h1>
-      { students.length === 0 ? ( 
-            <p>No student available</p>
-        ) : (
-      <table> 
-        <tr>
-          <td>FirstName</td>
-          <td>LastName</td>
-          <td>Age</td>
-          <td>Grade</td>
-          <td>Delete</td>
-        </tr>
-       
-        {students.map((student) => (
-          <tr key={student.id}>
-            <td>{student.firstName}</td>
-            <td>{student.lastName}</td>
-            <td>{student.age}</td>
-            <td>{student.grade}</td>
-            <td><button onClick={handleDelete}>Delete</button></td>
-          </tr> 
-        ))}
+      <table>
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          {student.map((studentData) => (
+            <tr key={studentData.firstName}>
+              <td>{studentData.firstName}</td>
+              <td>{studentData.lastName}</td>
+              <td>{studentData.age}</td>
+              <td>{studentData.grade}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
-  )}
     </>
   );
 };
+
+// mapStateToProps to get student data from the Redux store
 const mapStateToProps = (state) => {
-console.log(state)
+  console.log("state",state);  // This will show the Redux state structure for debugging purposes
   return {
-    student:  state.student,
+    student: state.student,  // Assuming the state structure has a `student` key
   };
 };
-export default connect(mapStateToProps)(StudentDetails);
+
+// mapDispatchToProps to dispatch the action to fetch students
+const mapDispatchToProps = {
+  getStudent,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(StudentDetails);
