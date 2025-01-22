@@ -5,7 +5,7 @@ import { getStudent } from "../Action/student";
 const StudentDetails = (props) => {
   
   const { student, getStudent } = props; // Destructure props for better readability
-  console.log(student)
+  const flattenedStudents = student.flat();
   // Fetch students when the component is mounted
   useEffect(() => {
     getStudent();
@@ -15,7 +15,7 @@ const StudentDetails = (props) => {
   if (!student || student.length === 0) {
     return <p>No students available</p>;
   }
-
+console.log(student)
   return (
     <>
       <h1>Student Details</h1>
@@ -29,8 +29,8 @@ const StudentDetails = (props) => {
           </tr>
         </thead>
         <tbody>
-          {student.map((studentData) => (
-            <tr key={studentData.firstName}>
+          {flattenedStudents.map((studentData) => (
+            <tr key={studentData.firstName + studentData.lastName}>
               <td>{studentData.firstName}</td>
               <td>{studentData.lastName}</td>
               <td>{studentData.age}</td>
