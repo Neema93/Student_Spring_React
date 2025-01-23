@@ -4,14 +4,14 @@ import { getStudent } from "../Action/student";
 
 const StudentDetails = (props) => {
   
-  const { student, getStudent } = props; // Destructure props for better readability
-  const flattenedStudents = student.flat();
-  // Fetch students when the component is mounted
+  const { student, getStudent } = props;
+  const flattenedStudents = student.flat(Infinity);
+ 
   useEffect(() => {
     getStudent();
   }, [getStudent]);
 
-  // Render based on whether data is available or not
+
   if (!student || student.length === 0) {
     return <p>No students available</p>;
   }
@@ -30,7 +30,7 @@ console.log(student)
         </thead>
         <tbody>
           {flattenedStudents.map((studentData) => (
-            <tr key={studentData.firstName + studentData.lastName}>
+            <tr key={studentData.studentId}>
               <td>{studentData.firstName}</td>
               <td>{studentData.lastName}</td>
               <td>{studentData.age}</td>
@@ -43,15 +43,13 @@ console.log(student)
   );
 };
 
-// mapStateToProps to get student data from the Redux store
+
 const mapStateToProps = (state) => {
-  console.log("state",state);  // This will show the Redux state structure for debugging purposes
+  console.log("state",state);  
   return {
-    student: state.student,  // Assuming the state structure has a `student` key
+    student: state.student, 
   };
 };
-
-// mapDispatchToProps to dispatch the action to fetch students
 const mapDispatchToProps = {
   getStudent,
 };

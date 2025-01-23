@@ -1,31 +1,29 @@
-import React, { useState } from "react";
+// src/components/StudentForm.js
+
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux'; // To dispatch actions
+import { addStudent, getStudent } from './../Action/student'; // Action to add student
+
 const StudentForm = () => {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [age, setAge] = useState('');
-    const [grade, setGrade] = useState('');
-    const [error, setError] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [age, setAge] = useState('');
+  const [grade, setGrade] = useState('');
+  const [error, setError] = useState('');
 
-  const handleFirstNameChange = (e) => {
-    setFirstName(e.target.value);
-  };
-  const handleLastNameChange = (e) => {
-    setLastName(e.target.value);
-  }
-  const handleAgeChange = (e) => {
-    setAge(e.target.value);
-  };
-  const handleGradeChange = (e) => {
-    setGrade(e.target.value);
-  }
+  const dispatch = useDispatch(); // Dispatch function to send actions
 
-  // Handle form submission
-  const handleSubmit = async (e) => {
+  const handleFirstNameChange = (e) => setFirstName(e.target.value);
+  const handleLastNameChange = (e) => setLastName(e.target.value);
+  const handleAgeChange = (e) => setAge(e.target.value);
+  const handleGradeChange = (e) => setGrade(e.target.value);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     // Basic validation
     if (!firstName || !lastName || !age || !grade) {
-      setError('all fields are required');
+      setError('All fields are required');
       return;
     }
 
@@ -35,46 +33,58 @@ const StudentForm = () => {
     // Create the student object
     const student = { firstName, lastName, age: parseInt(age), grade };
 
-    // Post the data to the backend (Spring Boot API or another API)
-    try {
-      const response = await fetch('http://localhost:8080/students', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(student),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to add student');
-      }
-
-      // Clear form after successful submission
-      setFirstName('');
-      setLastName('');
-      setAge('');
-      setGrade('');
-      alert('Student added successfully!');
-    } catch (error) {
-      console.error(error);
-      setError('Error adding student');
-    }
+    // Dispatch the action to add the student to Redux store
+    dispatch(addStudent(student));
+  
+    // Clear form after successful submission
+    setFirstName('');
+    setLastName('');
+    setAge('');
+    setGrade('');
+    alert('Student added successfully!');
+   
   };
+
   return (
     <>
       <form onSubmit={handleSubmit}>
         <label>First Name</label>
-        <input type="text" placeholder="First Name" onChange={handleFirstNameChange} required/>
+        <input
+          type="text"
+          placeholder="First Name"
+          value={firstName}
+          onChange={handleFirstNameChange}
+          required
+        />
         <label>Last Name</label>
-        <input type="text" placeholder="Last Name" onChange={handleLastNameChange} required/>
+        <input
+          type="text"
+          placeholder="Last Name"
+          value={lastName}
+          onChange={handleLastNameChange}
+          required
+        />
         <label>Age</label>
-        <input type="text" placeholder="Age" onChange={handleAgeChange} required />
+        <input
+          type="number"
+          placeholder="Age"
+          value={age}
+          onChange={handleAgeChange}
+          required
+        />
         <label>Grade</label>
-        <input type="text" placeholder="Grade" onChange={handleGradeChange} required />
+        <input
+          type="text"
+          placeholder="Grade"
+          value={grade}
+          onChange={handleGradeChange}
+          required
+        />
         <button type="submit">Submit</button>
         {error && <div style={{ color: 'red' }}>{error}</div>}
       </form>
     </>
   );
 };
+
 export default StudentForm;

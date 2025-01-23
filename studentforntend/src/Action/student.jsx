@@ -12,3 +12,12 @@ export const getStudent = () => async(dispatch) => {
     }
     
 }
+export const addStudent = (student) => async(dispatch) => {
+    try{
+        const response = await axios.post(API_URL,student);
+        dispatch({ type: "ADD_STUDENT", payload: response.data });
+        dispatch(getStudent());
+    }catch (error) {
+        console.error("Error add student:", error);
+      }
+}
