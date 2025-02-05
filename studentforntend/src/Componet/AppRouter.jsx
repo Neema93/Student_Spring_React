@@ -1,3 +1,15 @@
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import StudentForm from './StudentForm';
+import StudentDetails from './StudentDetails';
 const AppRouter = () => {
-    
+    return (
+        <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/StudentForm" element={<StudentForm />} />
+          <Route path="/StudentDetails" element={<StudentDetails />} />
+          
+        </Routes>
+      </Router>
+    )
 }
