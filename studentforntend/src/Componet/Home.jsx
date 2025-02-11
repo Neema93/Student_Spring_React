@@ -1,10 +1,13 @@
-import {Link} from 'react-router-dom';
-import StudentDetails from './StudentDetails';
+import Heading from "./Heading";
+import StudentDetails from "./StudentDetails";
+
+
 const Home = () => {
   return (
-    <>
+    <> 
+        <Heading />
       <h1>Student Details</h1>
-      <Link to="/StudentDetails">StudentDetails</Link>
+        <StudentDetails />
     </>
   );
 };

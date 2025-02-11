@@ -42,6 +42,7 @@ const StudentForm = () => {
     setAge('');
     setGrade('');
     alert('Student added successfully!');
+    
    
   };
 

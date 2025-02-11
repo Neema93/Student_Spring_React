@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import StudentForm from './StudentForm';
 import StudentDetails from './StudentDetails';
 import Heading from './Heading';
+import Home from './Home';
 const AppRouter = () => {
     return (
         <Router>
