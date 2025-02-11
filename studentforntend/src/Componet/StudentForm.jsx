@@ -41,7 +41,7 @@ const StudentForm = () => {
     setLastName('');
     setAge('');
     setGrade('');
-    alert('Student added successfully!');
+    
     
    
   };
