@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { useEffect } from "react";
-import { getStudent } from "../Action/student";
+import { deleteStudent, getStudent } from "../Action/student";
 
 const StudentDetails = (props) => {
   
@@ -11,6 +11,10 @@ const StudentDetails = (props) => {
     getStudent();
   }, [getStudent]);
 
+  const handleDelete = (studentId) => {
+    // Call the deleteStudent action to remove the student from the store
+    deleteStudent(studentId);
+  };
 
   if (!student || student.length === 0) {
     return <p>No students available</p>;
@@ -26,6 +30,7 @@ console.log(student)
             <th>Last Name</th>
             <th>Age</th>
             <th>Grade</th>
+            <th>Actions</th> 
           </tr>
         </thead>
         <tbody>
@@ -35,6 +40,11 @@ console.log(student)
               <td>{studentData.lastName}</td>
               <td>{studentData.age}</td>
               <td>{studentData.grade}</td>
+              <td>
+                <button onClick={() => handleDelete(studentData.studentId)}>
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -51,7 +61,7 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = {
-  getStudent,
+  getStudent,deleteStudent
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudentDetails);

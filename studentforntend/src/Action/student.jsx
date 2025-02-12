@@ -21,3 +21,13 @@ export const addStudent = (student) => async(dispatch) => {
         console.error("Error add student:", error);
       }
 }
+export const deleteStudent = (studentId) => async(dispatch) => {
+    try{
+        const response = await axios.delete(`${API_URL}/${studentId}`);
+
+        dispatch({type: 'DELETE_STUDENT',payload: studentId});
+        dispatch(getStudent());
+    }catch (error) {
+        console.error("Error delete student:", error);
+      }
+}

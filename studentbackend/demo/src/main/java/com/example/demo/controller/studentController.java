@@ -36,9 +36,9 @@ public List<Student> getAllStudent() {
 public Student createStudent(@RequestBody Student student) {
     return studentRepo.save(student);
 }
-@DeleteMapping("/students/{firstName}")
-public void delStudent(@PathVariable String firstName){
-    System.out.println("firstName:"+firstName);
+@DeleteMapping("/students/{studentId}")
+public void delStudent(@PathVariable String studentId){
+    System.out.println("studentId"+studentId);
     
 }
 }
