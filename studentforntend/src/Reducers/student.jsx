@@ -7,7 +7,7 @@ export const student = (state= studentDefualtState, action) => {
           case "ADD_STUDENT":
             return [...state, action.payload]
         case "DELETE_STUDENT":
-            return state.filter(({ id }) => id !== action.payload.id);
+            return state.filter((student) => student.studentId !== action.payload);
     
     default:
         return state;

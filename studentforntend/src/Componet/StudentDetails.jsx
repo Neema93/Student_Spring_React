@@ -4,7 +4,7 @@ import { deleteStudent, getStudent } from "../Action/student";
 
 const StudentDetails = (props) => {
   
-  const { student, getStudent } = props;
+  const { student, getStudent, deleteStudent } = props;
   const flattenedStudents = student.flat(Infinity);
  
   useEffect(() => {
@@ -12,14 +12,16 @@ const StudentDetails = (props) => {
   }, [getStudent]);
 
   const handleDelete = (studentId) => {
+   
     // Call the deleteStudent action to remove the student from the store
     deleteStudent(studentId);
+    console.log(studentId)
   };
 
   if (!student || student.length === 0) {
     return <p>No students available</p>;
   }
-console.log(student)
+
   return (
     <>
       <h1>Student Details</h1>
@@ -55,7 +57,6 @@ console.log(student)
 
 
 const mapStateToProps = (state) => {
-  console.log("state",state);  
   return {
     student: state.student, 
   };
