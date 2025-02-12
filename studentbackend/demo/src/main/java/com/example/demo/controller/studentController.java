@@ -37,8 +37,8 @@ public Student createStudent(@RequestBody Student student) {
     return studentRepo.save(student);
 }
 @DeleteMapping("/students/{studentId}")
-public void delStudent(@PathVariable String studentId){
+public void delStudent(@PathVariable Long studentId){
     System.out.println("studentId"+studentId);
-    
+    studentRepo.deleteById(studentId);
 }
 }
