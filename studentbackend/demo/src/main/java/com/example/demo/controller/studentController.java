@@ -28,7 +28,7 @@ public String sayHello() {
 public List<Student> getAllStudent() {
     List<Student> students = studentRepo.findAll();
     if (students.isEmpty()) {
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No students found");
+        return students;
     }
     return students;
 }
