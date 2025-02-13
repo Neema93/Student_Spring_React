@@ -3,9 +3,9 @@ import './App.css';
 import {Provider} from 'react-redux';
 import AppRouter from './Componet/AppRouter';
 import { configureStore } from "./Store/configureStore";
-import Heading from './Componet/Heading';
+
 const store = configureStore();
-const state = store.getState();
+
 
 function App() {
   return (

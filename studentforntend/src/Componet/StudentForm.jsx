@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux'; // To dispatch actions
-import { addStudent, getStudent } from './../Action/student'; // Action to add student
+import { addStudent} from './../Action/student'; // Action to add student
 
 const StudentForm = () => {
   const [firstName, setFirstName] = useState('');
